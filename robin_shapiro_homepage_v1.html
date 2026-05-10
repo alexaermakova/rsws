@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robin Shapiro Training — Personal Training in San Francisco</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7F4EF;
+    --charcoal: #1C1C1A;
+    --warm-gray: #8A8780;
+    --accent: #2D6A4F;
+    --accent-light: #B7D9C7;
+    --accent-pale: #EBF4EE;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(247, 244, 239, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(28,28,26,0.08);
+  }
+
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--charcoal);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    color: var(--warm-gray);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--charcoal); }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--white) !important;
+    padding: 10px 22px;
+    border-radius: 100px;
+    font-size: 14px !important;
+    font-weight: 500;
+    text-decoration: none;
+    transition: opacity 0.2s !important;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 64px 80px 64px;
+  }
+
+  .hero-eyebrow {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(42px, 5vw, 68px);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--charcoal);
+    margin-bottom: 28px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--warm-gray);
+    max-width: 420px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--charcoal);
+    color: var(--white);
+    padding: 16px 32px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--accent); }
+
+  .btn-ghost {
+    color: var(--charcoal);
+    font-size: 15px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s;
+  }
+
+  .btn-ghost:hover { gap: 12px; }
+
+  .hero-badge {
+    margin-top: 56px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .stars {
+    color: #F4B942;
+    font-size: 14px;
+    letter-spacing: 2px;
+  }
+
+  .badge-text {
+    font-size: 13px;
+    color: var(--warm-gray);
+  }
+
+  .badge-text strong {
+    color: var(--charcoal);
+    font-weight: 500;
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--charcoal);
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.88;
+    display: block;
+  }
+
+  .hero-img-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(28,28,26,0.15) 0%, transparent 60%);
+  }
+
+  /* STRIP */
+  .strip {
+    background: var(--accent);
+    padding: 20px 64px;
+    display: flex;
+    gap: 48px;
+    overflow-x: auto;
+  }
+
+  .strip-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+    color: var(--white);
+    font-size: 14px;
+    opacity: 0.9;
+  }
+
+  .strip-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    flex-shrink: 0;
+  }
+
+  /* ABOUT SECTION */
+  .section {
+    padding: 100px 64px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-img-wrap {
+    position: relative;
+  }
+
+  .about-img {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+  }
+
+  .about-img-badge {
+    position: absolute;
+    bottom: 32px;
+    right: -24px;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+  }
+
+  .about-img-badge .num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .about-img-badge .label {
+    font-size: 12px;
+    color: var(--warm-gray);
+    margin-top: 2px;
+  }
+
+  .about-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 3.5vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  .about-title em { font-style: italic; color: var(--accent); }
+
+  .about-body {
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--warm-gray);
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+
+  .about-creds {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cred {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--charcoal);
+  }
+
+  .cred-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    flex-shrink: 0;
+  }
+
+  /* SERVICES */
+  .services-bg {
+    background: var(--charcoal);
+    padding: 100px 64px;
+    color: var(--white);
+  }
+
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 56px;
+  }
+
+  .services-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 3.5vw, 48px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+
+  .services-title em { font-style: italic; color: var(--accent-light); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .service-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 40px 32px;
+    transition: background 0.2s;
+  }
+
+  .service-card:hover { background: rgba(255,255,255,0.07); }
+
+  .service-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 48px;
+    color: rgba(255,255,255,0.1);
+    line-height: 1;
+    margin-bottom: 24px;
+  }
+
+  .service-name {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .service-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+    margin-bottom: 24px;
+  }
+
+  .service-price {
+    font-size: 13px;
+    color: var(--accent-light);
+    font-weight: 500;
+  }
+
+  /* REVIEWS */
+  .reviews-section {
+    padding: 100px 64px;
+    background: var(--accent-pale);
+  }
+
+  .reviews-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .reviews-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(32px, 3.5vw, 48px);
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .reviews-sub {
+    font-size: 15px;
+    color: var(--warm-gray);
+    font-weight: 300;
+  }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .review-card {
+    background: var(--white);
+    border-radius: 4px;
+    padding: 32px;
+  }
+
+  .review-stars {
+    color: #F4B942;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+
+  .review-text {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--charcoal);
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  .review-author {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--warm-gray);
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 120px 64px;
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .cta-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  .cta-title em { font-style: italic; color: var(--accent); }
+
+  .cta-sub {
+    font-size: 17px;
+    color: var(--warm-gray);
+    line-height: 1.65;
+    font-weight: 300;
+    margin-bottom: 48px;
+  }
+
+  .cta-note {
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--warm-gray);
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid rgba(28,28,26,0.1);
+    padding: 40px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--charcoal);
+    text-decoration: none;
+  }
+
+  .footer-info {
+    font-size: 13px;
+    color: var(--warm-gray);
+    text-align: center;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: var(--warm-gray);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--charcoal); }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 80px 24px 48px; }
+    .hero-right { height: 55vw; min-height: 280px; }
+
+    .strip { padding: 16px 24px; gap: 32px; }
+    .section { padding: 72px 24px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-img-badge { right: 16px; }
+
+    .services-bg { padding: 72px 24px; }
+    .services-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .services-grid { grid-template-columns: 1fr; gap: 1px; }
+
+    .reviews-section { padding: 72px 24px; }
+    .reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+
+    .cta-section { padding: 80px 24px; }
+    footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+  }
+
+  /* FADE IN */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Robin Shapiro Training</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Book a free call</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Personal Training · San Francisco</p>
+    <h1 class="hero-title">
+      Training that<br>meets you<br><em>where you are.</em>
+    </h1>
+    <p class="hero-sub">
+      No judgment. No one-size-fits-all programs. Just thoughtful, science-backed training built around your body, your goals, and your life.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a free consultation</a>
+      <a href="#services" class="btn-ghost">See packages <span>→</span></a>
+    </div>
+    <div class="hero-badge">
+      <span class="stars">★★★★★</span>
+      <p class="badge-text"><strong>5.0 on Google</strong> · 10 reviews</p>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img
+      class="hero-img"
+      src="https://raw.githubusercontent.com/alexaermakova/rsws/main/rope.avif"
+      alt="Robin Shapiro training a client"
+    />
+    <div class="hero-img-overlay"></div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-item"><span class="strip-dot"></span>NASM Certified</div>
+  <div class="strip-item"><span class="strip-dot"></span>Kinesiology B.S. — Sonoma State</div>
+  <div class="strip-item"><span class="strip-dot"></span>1 Year at G Sports Physical Therapy</div>
+  <div class="strip-item"><span class="strip-dot"></span>The Yard · 2863 California St, SF</div>
+  <div class="strip-item"><span class="strip-dot"></span>Personal · Partner · Group Training</div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap fade-in">
+      <img
+        class="about-img"
+        src="https://raw.githubusercontent.com/alexaermakova/rsws/main/robin.avif"
+        alt="Robin Shapiro"
+      />
+      <div class="about-img-badge">
+        <div class="num">3+</div>
+        <div class="label">years training</div>
+      </div>
+    </div>
+    <div class="fade-in">
+      <p class="section-label">About Robin</p>
+      <h2 class="about-title">Science-backed.<br><em>Human-first.</em></h2>
+      <p class="about-body">
+        Robin's approach to training is rooted in movement science and shaped by real clinical experience. After earning a Kinesiology degree and spending a year working alongside physical therapists at G Sports, he brings a level of anatomical understanding that most trainers simply don't have.
+      </p>
+      <p class="about-body">
+        His style is direct, encouraging, and completely judgment-free. Whether you're recovering from an injury, building strength for the first time, or pushing for your next athletic goal — Robin designs programs that actually fit your life.
+      </p>
+      <div class="about-creds">
+        <div class="cred"><span class="cred-dot"></span>NASM Certified Personal Trainer</div>
+        <div class="cred"><span class="cred-dot"></span>B.S. Kinesiology, Exercise Science — Sonoma State University</div>
+        <div class="cred"><span class="cred-dot"></span>1 Year Clinical Experience — G Sports Physical Therapy</div>
+        <div class="cred"><span class="cred-dot"></span>Specializes in injury prevention & rehabilitation-informed training</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-bg" id="services">
+  <div class="services-header">
+    <h2 class="services-title">Training that<br><em>fits your life.</em></h2>
+    <p style="font-size:14px;color:rgba(255,255,255,0.4);max-width:220px;line-height:1.6;text-align:right;">All sessions at The Yard, 2863 California St · 1 hour</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card fade-in">
+      <div class="service-num">01</div>
+      <div class="service-name">Personal Training</div>
+      <div class="service-desc">Fully individualized programming built around your goals, movement patterns, and any injuries or limitations. The most direct path to results.</div>
+      <div class="service-price">$175/session · Packages from $225/session (8x) or $265/session (4x)</div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-num">02</div>
+      <div class="service-name">Partner Training</div>
+      <div class="service-desc">Train with a friend, partner, or co-worker. Same personalized coaching, shared cost. A great way to stay accountable and have fun doing it.</div>
+      <div class="service-price">$125/session · Packages from $210/session (8x) or $320/session (4x)</div>
+    </div>
+    <div class="service-card fade-in">
+      <div class="service-num">03</div>
+      <div class="service-name">Group Training</div>
+      <div class="service-desc">High-energy small-group sessions for 3–4 people. Individual coaching in a group setting — structured, effective, and genuinely fun.</div>
+      <div class="service-price">From $90/session · Packages available (8x or 4x)</div>
+    </div>
+  </div>
+  <div style="margin-top:48px;padding-top:48px;border-top:1px solid rgba(255,255,255,0.08);">
+    <p style="font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:20px;">Not sure where to start?</p>
+    <a href="#contact" class="btn-primary" style="display:inline-block;">Book a free 20-min consultation call</a>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY -->
+<section style="padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; background: var(--charcoal);">
+  <div style="overflow:hidden; aspect-ratio: 4/3;">
+    <img src="https://raw.githubusercontent.com/alexaermakova/rsws/main/balls.avif" alt="Robin training group" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+  </div>
+  <div style="overflow:hidden; aspect-ratio: 4/3;">
+    <img src="https://raw.githubusercontent.com/alexaermakova/rsws/main/dumbbells.avif" alt="Robin training client" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+  </div>
+  <div style="overflow:hidden; aspect-ratio: 4/3;">
+    <img src="https://raw.githubusercontent.com/alexaermakova/rsws/main/dumbbells2.avif" alt="Robin with client" style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="reviews-section" id="reviews">
+  <div class="reviews-header fade-in">
+    <p class="section-label">What clients say</p>
+    <h2 class="reviews-title">5.0 on Google</h2>
+    <p class="reviews-sub">10 reviews · The Yard, San Francisco</p>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card fade-in">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Robin is knowledgeable, patient, and genuinely invested in your progress. He explained the why behind every exercise, which made a huge difference for me."</p>
+      <p class="review-author">— Google Review</p>
+    </div>
+    <div class="review-card fade-in">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"I came in with a shoulder injury and was nervous about training again. Robin was thoughtful about every movement and I've made more progress than I expected."</p>
+      <p class="review-author">— Google Review</p>
+    </div>
+    <div class="review-card fade-in">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"No judgment, no pressure, just solid training. Robin meets you where you are and builds from there. I've recommended him to everyone I know."</p>
+      <p class="review-author">— Google Review</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact">
+  <div class="cta-section fade-in">
+    <p class="section-label">Get started</p>
+    <h2 class="cta-title">Your first session<br>starts with a<br><em>conversation.</em></h2>
+    <p class="cta-sub">Book a free 20-minute intro call. No commitment, no pressure — just a chance to talk through your goals and see if it's a good fit.</p>
+    <a href="mailto:robinshapirotraining@gmail.com" class="btn-primary">Book your free call</a>
+    <p class="cta-note">Or call/text: 415-298-4696</p>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="footer-logo">Robin Shapiro Training</a>
+  <p class="footer-info">The Yard · 2863 California St, San Francisco, CA 94115</p>
+  <div class="footer-links">
+    <a href="#">Instagram</a>
+    <a href="#">LinkedIn</a>
+    <a href="mailto:robinshapirotraining@gmail.com">Email</a>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
